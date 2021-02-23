@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: raja.ravichatapp.tk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend 
+          servicePort: 80
