@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: "646702086747.dkr.ecr.ap-south-1.amazonaws.com/jenkinsbackend:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: tcp
+              containerPort: 8000
+
+
+
