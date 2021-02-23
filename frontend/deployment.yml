@@ -1,0 +1,35 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deploy
+  labels:
+    app: frontend
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: frontend
+          image: >-
+            646702086747.dkr.ecr.ap-south-1.amazonaws.com/frontendimageforkops:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: chatapp
+              mountPath: /etc/nginx/conf.d/
+              readOnly: true
+      volumes:
+        - name: chatapp
+          configMap:
+            name: chatapp-conf
+
+
